@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI阅读助手</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+  <div class="app">
+    <!-- 顶部栏 -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-logo">📖</span>
+        <span class="brand-name">AI阅读助手</span>
+      </div>
+      <div class="topbar-actions">
+        <button id="btn-settings" class="btn btn-ghost" title="设置">⚙️ 设置</button>
+        <button id="btn-export" class="btn btn-ghost" title="导出Markdown">⬇️ 导出</button>
+        <button id="btn-clear" class="btn btn-ghost" title="清空对话">🗑️ 清空</button>
+      </div>
+    </header>
+
+    <!-- 源信息 -->
+    <section class="source-panel">
+      <div class="source-title" id="source-title">未加载文章</div>
+      <a class="source-link" id="source-link" href="#" target="_blank" rel="noopener"></a>
+      <div class="source-meta" id="source-meta"></div>
+    </section>
+
+    <!-- 快捷功能 -->
+    <section class="quick-actions">
+      <button class="qa-btn" data-prompt="summary">📝 生成摘要</button>
+      <button class="qa-btn" data-prompt="keypoints">🔑 提取要点</button>
+      <button class="qa-btn" data-prompt="translate">🌐 全文翻译</button>
+      <button class="qa-btn" data-prompt="rewrite">✨ 改写润色</button>
+    </section>
+
+    <!-- 提示条 -->
+    <div id="hint" class="hint hidden"></div>
+
+    <!-- 对话历史 -->
+    <main id="chat" class="chat"></main>
+
+    <!-- 输入区 -->
+    <footer class="composer">
+      <textarea id="input" class="composer-input" rows="1"
+        placeholder="输入问题，基于网页正文提问…（Enter 发送，Shift+Enter 换行）"></textarea>
+      <button id="btn-send" class="btn-send" title="发送">发送</button>
+    </footer>
+  </div>
+
+  <!-- 设置弹窗 -->
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>API 配置</h2>
+        <button class="modal-close" id="modal-close" title="关闭">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="field">
+          <span class="field-label">API 地址（OpenAI 兼容，一般以 /v1 结尾）</span>
+          <input type="text" id="cfg-baseurl" placeholder="https://api.openai.com/v1" autocomplete="off">
+        </label>
+        <label class="field">
+          <span class="field-label">API Key</span>
+          <div class="key-row">
+            <input type="password" id="cfg-apikey" placeholder="sk-..." autocomplete="off">
+            <button id="btn-toggle-key" class="btn-ghost" type="button" title="显示/隐藏">👁</button>
+          </div>
+        </label>
+        <label class="field">
+          <span class="field-label">模型名称</span>
+          <input type="text" id="cfg-model" placeholder="gpt-3.5-turbo" autocomplete="off">
+        </label>
+        <p class="modal-hint">API Key 仅保存在本地存储，由后台代理请求，不会发送到任何内容脚本或第三方页面。</p>
+        <div class="modal-actions">
+          <button id="btn-test" class="btn btn-outline">测试连接</button>
+          <button id="btn-save" class="btn btn-primary">保存配置</button>
+        </div>
+        <div id="test-result" class="test-result"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="gallery.js"></script>
+</body>
+</html>
