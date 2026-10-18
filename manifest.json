@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "通用网页AI阅读助手",
+  "version": "1.0.0",
+  "description": "一键提取网页纯净正文，AI摘要/要点/翻译/改写，支持多轮对话与 Markdown 导出。",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_title": "AI阅读助手"
+  }
+}
